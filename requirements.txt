@@ -1,0 +1,8 @@
+streamlit>=1.32.0
+numpy>=1.24.0
+pandas>=2.0.0
+plotly>=5.18.0
+openpyxl>=3.1.2
+pywaffle>=0.6.1
+seaborn>=0.12.0
+matplotlib>=3.7.0 
