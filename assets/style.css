@@ -1,0 +1,142 @@
+/* ===== Root Variables ===== */
+:root {
+  /* Backgrounds & Panels */
+  --bg: #0e1525; /* Deep navy background */
+  --panel: #161e2e; /* Slightly lighter panels */
+  --panel-hover: #1f2a40;
+
+  /* Text Colors */
+  --text: #f4f7fa; /* Main text */
+  --text-muted: #a5b4c0; /* Muted text for hints */
+
+  /* Accent Colors */
+  --primary: #14231a; /* Soft green */
+  --primary-hover: #4d8363; /* Darker green on hover */
+  --accent: #f39c12; /* Amber for highlights */
+  --danger: #e74c3c; /* Red for remove/delete buttons */
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+
+  /* Fonts */
+  --font-main: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== Global Layout ===== */
+[data-testid="stAppViewContainer"] {
+  background: var(--bg);
+  font-family: var(--font-main);
+}
+
+[data-testid="stSidebar"] {
+  background: rgba(15, 20, 30, 0.85);
+  border-right: 1px solid var(--border);
+}
+
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6,
+p, li, label, span, div {
+  color: var(--text);
+  font-family: var(--font-main);
+}
+
+h1 { font-weight: 700; letter-spacing: -0.5px; }
+h2, h3 { font-weight: 600; }
+p, li { color: var(--text-muted); }
+
+/* ===== Buttons ===== */
+.stButton > button,
+.stDownloadButton > button {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 0.9rem !important;
+  font-weight: 600;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover {
+  background: var(--primary-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+.stButton.danger > button {
+  background: var(--danger) !important;
+}
+.stButton.danger > button:hover {
+  background: #c0392b !important;
+}
+
+/* ===== DataFrame/Table Styling ===== */
+.stDataFrame table {
+  border-collapse: collapse;
+  background: var(--panel);
+}
+
+.stDataFrame table td,
+.stDataFrame table th {
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+}
+
+.stDataFrame table thead th {
+  background-color: var(--panel-hover);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stDataFrame table tbody tr:hover {
+  background-color: var(--panel-hover);
+}
+
+/* ===== Inputs ===== */
+.stSelectbox, .stTextInput, .stNumberInput, .stSlider, .stMultiSelect {
+  background: var(--panel) !important;
+  border-radius: 6px !important;
+  border: 1px solid var(--border) !important;
+}
+
+.stSelectbox div[role="listbox"] {
+  background: var(--panel) !important;
+}
+
+.stSelectbox div[role="option"] {
+  color: var(--text) !important;
+}
+
+/* ===== Tabs ===== */
+.stTabs [role="tablist"] {
+  border-bottom: 2px solid var(--border);
+}
+
+.stTabs [role="tab"] {
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.stTabs [role="tab"][aria-selected="true"] {
+  color: var(--primary);
+  border-bottom: 3px solid var(--primary);
+}
+
+/* ===== Chart Container ===== */
+[data-testid="stPlotlyChart"] {
+  background-color: var(--panel);
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* ===== Section Spacing ===== */
+section.main > div.block-container {
+  padding-top: 0.6rem;
+  padding-bottom: 0.8rem;
+}
