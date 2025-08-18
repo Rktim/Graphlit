@@ -25,9 +25,6 @@ PALETTES = {
     # Qualitative (good for categories)
     "Plotly": px.colors.qualitative.Plotly,
     "Pastel": px.colors.qualitative.Pastel,
-    "Set1": px.colors.qualitative.Set1,
-    "Set2": px.colors.qualitative.Set2,
-    "Set3": px.colors.qualitative.Set3,
     "Bold": px.colors.qualitative.Bold,
     "D3": px.colors.qualitative.D3,
     "Prism": px.colors.qualitative.Prism,
@@ -110,11 +107,11 @@ def render_main():
                 with col:
                     st.subheader(f"{i+1}. {item.get('title', 'Chart')}")
                     if item.get("fig") is not None:
-                        st.plotly_chart(item["fig"], use_container_width=True)
+                        st.plotly_chart(item["fig"], use_container_width=True, key=f"dashboard_chart_{i}_{item['id']}")
                     elif item.get("png_bytes"):
-                        st.image(item["png_bytes"], use_container_width=True)
+                        st.image(item["png_bytes"], use_container_width=True, key=f"dashboard_img_{i}_{item['id']}")
                     elif item.get("html"):
-                        st.components.v1.html(item["html"], height=420)
+                        st.components.v1.html(item["html"], height=420, key=f"dashboard_html_{i}_{item['id']}")
 
                     # Action buttons for each chart
                     a, b, c = st.columns([1, 1, 1])
