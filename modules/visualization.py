@@ -48,12 +48,28 @@ def bar_chart(df, preset, palette, title, rotate_x, dtick, yfmt, showlegend, agg
 def line_chart(df, preset, palette, title, rotate_x, dtick, yfmt, showlegend, agg, group_by):
     numeric_cols = df.select_dtypes(include=["number"]).columns.tolist()
     category_cols = df.select_dtypes(exclude=["number"]).columns.tolist()
+    all_x = numeric_cols + category_cols + df.select_dtypes(include=["datetime64"]).columns.tolist()
 
-    x = st.selectbox("X axis", category_cols, key="line_x")
+    x = st.selectbox("X axis", all_x, key="line_x")
     y = st.selectbox("Y axis", numeric_cols, key="line_y")
 
-    fig = px.line(df, x=x, y=y, color=group_by, color_discrete_sequence=palette,
-                  title=title if title else None)
+    df_plot = df.copy()
+
+    # If X is categorical, aggregate Y
+    if x in category_cols and agg != "none":
+        agg_funcs = {
+            "mean": "mean", "median": "median", "mode": lambda s: s.mode().iloc[0] if not s.mode().empty else None,
+            "sum": "sum", "max": "max", "min": "min", "count": "count"
+        }
+        if agg in agg_funcs:
+            df_plot = df.groupby(x)[y].agg(agg_funcs[agg]).reset_index()
+    elif x in category_cols and agg == "none":
+        st.warning("⚠️ Categorical X detected — applying 'mean' aggregation by default for line chart.")
+        df_plot = df.groupby(x)[y].mean().reset_index()
+
+    fig = px.line(df_plot, x=x, y=y, color=group_by, color_discrete_sequence=palette,
+                  title=title if title else None, markers=True)
+
     fig.update_layout(showlegend=showlegend)
     fig.update_xaxes(tickangle=rotate_x, dtick=dtick if dtick != 0 else None)
     if yfmt:
