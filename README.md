@@ -69,12 +69,6 @@ Perfect for:
 
 ---
 
-## 📌 Roadmap
-- [ ] Export dashboards as PDF/HTML  
-- [ ] More chart types (Bubble, TreeMap, Sunburst)    
-
----
-
 <div align="center">
   Made with ❤️ using Streamlit & Plotly
 </div>
